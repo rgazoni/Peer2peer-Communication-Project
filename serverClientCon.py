@@ -265,7 +265,7 @@ class ClientServerCon(socket.socket):
 # Main on python
 if __name__ == "__main__": 
 
-    ip = int(input("Escolha um IP: "))
+    ip = input("Escolha um IP: ")
     port = int(input("Escolha uma porta: "))
 
     with ClientServerCon(ip, port) as scCon:
