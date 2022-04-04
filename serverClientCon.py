@@ -58,17 +58,17 @@ class ClientServerCon(socket.socket):
                 messageTime = datetime.timestamp(dt)
 
                 try:
-                    time = messageJSON['Timestamp_da_mensagem']
+                    time = messageJSON['Timestamp da mensagem']
                 except KeyError:
-                    time = messageJSON['Timestamp_da_mensagem_de_resposta']
+                    time = messageJSON['Timestamp da mensagem de resposta']
                 
                 data = {
                 "Ip_origem": self.IPserver,
                 "Ip_destino": messageJSON['Ip_origem'],
                 "Porta_origem": self.portServer,
                 "Porta_destino": messageJSON['Porta_origem'],
-                "Timestamp_da_mensagem_original": time,
-                "Timestamp_da_mensagem_de_resposta": messageTime,
+                "Timestamp da mensagem original": time,
+                "Timestamp da mensagem de resposta": messageTime,
                 "ACK" : True
                 }   
 
@@ -95,10 +95,10 @@ class ClientServerCon(socket.socket):
             messageJSON = json.loads(messageStr)
 
             try:
-                msgOri = messageJSON['Mensagem_original']
+                msgOri = messageJSON['Mensagem original']
                 print("Mensagem original: \n\t{}".format(msgOri))
                 print("Resposta da mensagem de Ip {} e porta {}".format(messageJSON['Ip_origem'], messageJSON['Porta_origem']))
-                print("\t{}".format(messageJSON['Mensagem_de_resposta']))
+                print("\t{}".format(messageJSON['Mensagem de resposta']))
                 
                 inp = ''
                 while inp != 'q' and inp != 'Q':
@@ -124,10 +124,10 @@ class ClientServerCon(socket.socket):
                     "Ip_destino": messageJSON['Ip_origem'],
                     "Porta_origem": self.portServer,
                     "Porta_destino": messageJSON['Porta_origem'],
-                    "Timestamp_da_mensagem_original": messageJSON['Timestamp_da_mensagem'],
-                    "Timestamp_da_mensagem_de_resposta": messageTime,
-                    "Mensagem_original": messageJSON['Mensagem'],
-                    "Mensagem_de_resposta": newMsg
+                    "Timestamp da mensagem original": messageJSON['Timestamp da mensagem'],
+                    "Timestamp da mensagem de resposta": messageTime,
+                    "Mensagem original": messageJSON['Mensagem'],
+                    "Mensagem de resposta": newMsg
                     }
 
                     messageStr = json.dumps(data)
@@ -157,11 +157,11 @@ class ClientServerCon(socket.socket):
         "Ip_destino": ip,
         "Porta_origem": self.portServer,
         "Porta_destino": port,
-        "Timestamp_da_mensagem": messageTime,
+        "Timestamp da mensagem": messageTime,
         "Mensagem": message
         }
 
-        #Converting dict to JSON
+        #Converting dict to str
         messageJSON = json.dumps(data)
 
         retryThread = threading.Thread(target=self._retry, args=(messageJSON, ip, port))
@@ -198,9 +198,9 @@ class ClientServerCon(socket.socket):
             "Ip_destino": ipDest,
             "Porta_origem": self.portServer,
             "Porta_destino": portDest,
-            "Timestamp_da_mensagem_original": messageJSON['Timestamp_da_mensagem'],
-            "Timestamp_da_mensagem_de_resposta": messageTime,
-            "Mensagem_original": messageJSON['Mensagem'],
+            "Timestamp da mensagem original": messageJSON['Timestamp da mensagem'],
+            "Timestamp da mensagem de resposta": messageTime,
+            "Mensagem original": messageJSON['Mensagem'],
             "ACK" : False
             }
                     
@@ -231,8 +231,8 @@ class ClientServerCon(socket.socket):
                     print("\tIp Destino", messageACKJSON['Ip_destino'])
                     print("\tPorta Origem", messageACKJSON['Porta_origem'])
                     print("\tPorta Destino", messageACKJSON['Porta_destino'])
-                    print("\tTimestamp da Mensagem", messageACKJSON['Timestamp_da_mensagem_original'])
-                    print("\tTimestamp da Resposta", messageACKJSON['Timestamp_da_mensagem_de_resposta'])
+                    print("\tTimestamp da Mensagem", messageACKJSON['Timestamp da mensagem original'])
+                    print("\tTimestamp da Resposta", messageACKJSON['Timestamp da mensagem de resposta'])
                     print("---------------------------------------\n")
                 else :
                     print("---------------------------------------")
@@ -241,8 +241,8 @@ class ClientServerCon(socket.socket):
                     print("\tIp Destino", messageACKJSON['Ip_destino'])
                     print("\tPorta Origem", messageACKJSON['Porta_origem'])
                     print("\tPorta Destino", messageACKJSON['Porta_destino'])
-                    print("\tTimestamp da Mensagem", messageACKJSON['Timestamp_da_mensagem_original'])
-                    print("\tTimestamp da Resposta", messageACKJSON['Timestamp_da_mensagem_de_resposta'])
+                    print("\tTimestamp da Mensagem", messageACKJSON['Timestamp da mensagem original'])
+                    print("\tTimestamp da Resposta", messageACKJSON['Timestamp da mensagem de resposta'])
                     print("---------------------------------------\n")
             
             print("\nSeja bem-vindo ao minimail.")
