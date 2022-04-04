@@ -73,7 +73,7 @@ Segue abaixo todas as arquiteturas e fluxos utilizados no programa. Esse tópico
 
 <br/>
 
-## Fluxo do Servidor
+## Fluxo do Programa
 
 ![Fluxo do programa](./assets/images/flowchart.png)
 
